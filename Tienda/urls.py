@@ -10,19 +10,19 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'Tienda.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    
+
     url('^$', TemplateView.as_view(template_name='base.html'), name = 'base'),
 
     url(r'^admin/', include(admin.site.urls)),
 
     # Aplicacion articulos 
-    url(r'^articulos/', include('articulos.urls', namespace='articulos')),
+    #url(r'^articulos/', include('articulos.urls', namespace='articulos')),
 
     #url(r'^$', TemplateView.as_view(template_name='index.html'), articulos.views.componentes, name='index'),
     #url(r'^$', 'articulos.views.subcategoria', name='index'),
     
     # Aplicacion ventas
-    url(r'^pedidos/', include('pedidos.urls', namespace='pedidos')),
+    #url(r'^pedidos/', include('pedidos.urls', namespace='pedidos')),
     
     # Aplicacion usuarios
     url(r'usuarios/', include('usuarios.urls', namespace='usuarios')),

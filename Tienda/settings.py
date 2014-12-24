@@ -1,5 +1,3 @@
-#encoding:utf-8
-
 """
 Django settings for Tienda project.
 
@@ -71,7 +69,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'es-es'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 

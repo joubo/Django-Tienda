@@ -14,6 +14,16 @@
     {% endif %}
     <label for="id_username"><br>Nombre:</label> {{ form.username }}
 
+    {% if form.direccion.errors %}
+      {{ form.direccion.html_error_list }}
+    {% endif %}
+    <label for="id_direccion"><br>Direccion:</label> {{ form.direccion }}
+
+    {% if form.telefono.errors %}
+      {{ form.telefono.html_error_list }}
+    {% endif %}
+    <label for="id_telefono"><br>Telefono:</label> {{ form.telefono }}
+
     {% if form.password1.errors %}
       {{ form.password1.html_error_list }}
     {% endif %}
@@ -22,7 +32,7 @@
     {% if form.password2.errors %}
       {{ form.password2.html_error_list }}
     {% endif %}
-    <label for="id_password2"><br>Repita clave de acceso: {{ form.password2 }}
+    <label for="id_password2"><br>Repita clave: {{ form.password2 }}
 
     <input type="submit" value="Crear" />
   </label>

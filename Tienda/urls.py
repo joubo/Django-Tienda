@@ -25,6 +25,6 @@ urlpatterns = patterns('',
     #url(r'^pedidos/', include('pedidos.urls', namespace='pedidos')),
     
     # Aplicacion usuarios
-    url(r'^usuarios/', include('usuarios.urls', namespace='usuarios')),
+    url(r'usuarios/', include('usuarios.urls', namespace='usuarios')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

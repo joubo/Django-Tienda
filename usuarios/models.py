@@ -7,7 +7,7 @@ from django.forms import ModelForm
 
 class Usuario(models.Model):
 
-	login_id  =  models.CharField(max_length=30)
+	username  =  models.CharField(max_length=30, unique = True)
 	nombre = models.CharField(max_length=30, blank=True, default='')
 	apellidos  = models.CharField(max_length=30, blank=True, default='')
 	email = models.EmailField()
@@ -15,6 +15,9 @@ class Usuario(models.Model):
 	dni = models.CharField(max_length=9)
 	direccion = models.CharField(max_length=50)
 	created_time = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return self.username
 
 
 class UsuarioForm(ModelForm):

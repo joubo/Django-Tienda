@@ -11,7 +11,7 @@ class Articulo(models.Model):
 	categoria = models.IntegerField(default = 0)
 	precio = models.IntegerField()
 	descripcion = models.TextField()
-	imagen = models.ImageField(upload_to='articulos', verbose_name='Imagen')
+	#imagen = models.ImageField(upload_to='articulos', verbose_name='Imagen')
 	stock = models.IntegerField()
 
 	def __unicode__(self):

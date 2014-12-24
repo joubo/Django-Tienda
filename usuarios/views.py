@@ -13,7 +13,7 @@ def userRegister(request):
         form = UsuarioForm(request.POST)
         if form.is_valid():
             usuario = form.save()
-            return redirect('/tienda')
+            return redirect('/usuarios/login')
     else:
         form = UsuarioForm()
  

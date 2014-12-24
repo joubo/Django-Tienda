@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'Tienda.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url('^$', TemplateView.as_view(template_name='base.html'), name = 'base'),
+    url(r'^$', TemplateView.as_view(template_name='base.html'), name = 'base'),
 
     url(r'^admin/', include(admin.site.urls)),
 
@@ -21,10 +21,10 @@ urlpatterns = patterns('',
     #url(r'^$', TemplateView.as_view(template_name='index.html'), articulos.views.componentes, name='index'),
     #url(r'^$', 'articulos.views.subcategoria', name='index'),
     
-    # Aplicacion ventas
+    # Aplicacion pedidos
     #url(r'^pedidos/', include('pedidos.urls', namespace='pedidos')),
     
     # Aplicacion usuarios
-    url(r'usuarios/', include('usuarios.urls', namespace='usuarios')),
+    url(r'^usuarios/', include('usuarios.urls', namespace='usuarios')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

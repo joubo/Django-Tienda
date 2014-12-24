@@ -2,9 +2,11 @@
 
 {% block Contents %}
 
-  {% if form.errors %}
-    <p class="error">Error, datos mal introducidos</p>
-  {% endif %}
+  
+  
+  <p class="error">Error, usuario o clave de acceso incorrecto</p>
+  <br>
+  <br>
 
   <form action='.' method='post'> {% csrf_token %}
     <label for="username">Usuario:</label>

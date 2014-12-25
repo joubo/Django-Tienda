@@ -1,11 +1,10 @@
-{% extends "base.html" %}
-{% block Contents %}
- 
-<form action="{% url 'usuarios:register' %}" method="post">
-    {% csrf_token %} 
- 
-    {{ form.as_p }}
- 
-    <input type="submit" value="Registrar" />
-</form>
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>Registro de nuevo usuario</h2>
+
+	<form id='form' method='post' enctype='multipart/form-data' action=''>{% csrf_token %}
+		<table class='formTable'>{{form}}</table>
+		<p><input class="btn btn-primary" type='submit' value='Registrar'></p>
+	</form>
 {% endblock %}

@@ -5,20 +5,21 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
-from .models import UsuarioForm
+from forms import UserForm
 
 
 def userRegister(request):
-    if request.method == 'POST':
-        form = UsuarioForm(request.POST)
-        if form.is_valid():
-            usuario = form.save()
-            return redirect('/usuarios/login')
-    else:
-        form = UsuarioForm()
- 
-    context = {'form' : form}
-    return render(request, "usuarios/register.html", context)
+	form = UserForm(request.POST)
+	if request.method == 'POST':
+		data = request.POST.copy()
+		if form.is_valid:
+			new_user = form.save(data)
+			return redirect('/usuarios/login')
+	else:
+		form = UserForm()
+
+	context = {'form' : form}
+	return render(request, "usuarios/register.html", context)
 
 def userLogin(request):
 	if request.method == 'POST':

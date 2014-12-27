@@ -6,13 +6,23 @@
     <p class="error">Error, datos mal introducidos</p>
   {% endif %}
 
-  <form action='.' method='post'> {% csrf_token %}
-    <label for="username">Usuario:</label>
-    <input type="text" name="username" value="" id="username">
-    <label for="password">Clave de acceso:</label>
-    <input type="password" name="password" value="" id="password">
+  <div class="row">
+    <div class="col-lg-offset-1 col-lg-3" style="background:#00f0db;">
 
-    <input type="submit" value="login" />
-    <input type="hidden" name="next" value="{{next}}" />
-  </form>
+      <form action='.' method='post'> {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Usuario:</label>
+          <input type="text" name="username" class="form-control" id="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Clave de acceso:</label>
+          <input type="password" name="password" class="form-control" id="password">
+        </div>
+     
+        <input type="submit" value="login" />
+        <input type="hidden" name="next" class="btn btn-default" value="{{next}}" />
+      </form>
+    </div>
+  </div>
+
 {% endblock %}

@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
+{% block jquery %}
+	<script src="/static/js/jquery-1.11.2.min.js"></script>
+        <script>
+            $(document).ready(function(){
+
+                $(".helptext").hide();
+            });
+        </script>
+{% endblock %}
+
 {% block Contents %}
 	<h2>Registro de nuevo usuario</h2>
 

@@ -4,67 +4,51 @@
 <html>
     <head>  
         <meta charset="utf-8">
-        <script src="/static/js/jquery-1.11.2.min.js"></script>
-        <script>
-            $(document).ready(function(){
-
-                $(".helptext").hide();
-            });
-        </script>
+        
+        {% block jquery %}
+        {% endblock %}
 
         <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
         <title>Tienda Online</title>
     </head>
 
     <body>
-        <header>
-            <h1>{% block Header %}TIENDA ONLINE{% endblock %}</h1>
-            <div id="login">
-
-                {% if user.is_authenticated %}
-                    <a>{{user.username}}</a>
-                    <a href="/usuarios/logout">Cerrar sesion</a>
-                {% else %}
-                    <a href="/usuarios/login">Iniciar sesion</a>
-                    <a> o </a>
-                    <a href="/usuarios/register">registrarse</a>
-                {% endif %}
-
+        {% block Header %}
+            <div class="jumbotron">
+                <h1>Tienda OnLine</h1>
+           
             </div>
-        </header>
+       <!--  {% if user.is_authenticated %}
+            <a>{{user.username}}</a>
+            <a href="/usuarios/logout">Cerrar sesion</a>
+        {% else %}
+            <a href="/usuarios/login">Iniciar sesion</a>
+            <a> o </a>
+            <a href="/usuarios/register">registrarse</a>
+            {% endif %} -->
+        {% endblock %}
   
-        <nav>
-        	{% block NavigationTop %}
-            <ul>
-                <li><a>Inicio</a></li>
-                <li><a>Equipos</a></li>
-                <li><a>Jugadores</a></li>
-            </ul>
-            {% endblock %}
-        </nav>
+    	{% block NavigationTop %}
+        <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>
+        {% endblock %}
  
-        <div id="content-container">        	
-            <section id="left-navigation">
-            	{% block NavigationLeft %}
-                <ul>
-                  
-              	</ul>
-                {% endblock %}
-            </section>            
-                        
-            <div id="content">
-            {% block Contents %}
-                <h2>Bienvenido a la Tienda On Line</h2> 				
-    		{% endblock %}
-            </div>                 
-        </div>
+       
+        {% block NavigationLeft %}
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">Profile</a></li>
+                <li role="presentation"><a href="#">Messages</a></li>
+            </ul>
+        {% endblock %}
+     
+        {% block Contents %}
+            <h2>Bienvenido a la Tienda On Line</h2> 				
+    	{% endblock %}
+        
 
-        <footer>
-        	{% block Footer %}
-           		&copy {% now "Y" %}, Jordi Bordoy Nieto
-            {% endblock %}
-        </footer>
+        {% block Footer %}
+           	&copy {% now "Y" %}, Jordi Bordoy Nieto
+        {% endblock %}
         
   </body>
-
-  </html> 
+</html> 

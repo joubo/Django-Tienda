@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block Content %}
+    <h2>Listado de Usuarios</h2> 
+
+	{% for usuario in listaUsuarios %}
+	<ul>
+		<li>
+            <a href='/usuarios/usuario/{{user.id}}'>{{usuario.username}}</a>
+        </li>
+	</ul>
+	{% endfor %}
+{% endblock %}

@@ -1,4 +1,3 @@
-# Create your views here.
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -6,7 +5,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from forms import MyUserCreationForm
+from django.views.generic import ListView, View
 
+# Create your views here.
+
+#@user_passes_test(lambda u: u.is_superuser,login_url='/usuarios/login')
+class UserListView(ListView):
+	model = User
+	context_object_name = 'listaUsuarios'
+	template_name = 'usuarios/listaUsuarios.html'
 
 def userRegister(request):
 	form = MyUserCreationForm(request.POST)
@@ -31,13 +38,14 @@ def userLogin(request):
 			if access is not None:
 				if access.is_active:
 					login(request, access)
-					return redirect('/usuarios')
+					return redirect('/')
 				else:
 					return render(request, 'usuarios/inactive.html')
 			else:
 				return render(request, 'usuarios/nouser.html')
 	else:
 		form = AuthenticationForm()
+
 	context = {'form': form}
 	return render(request,'usuarios/login.html', context)
 

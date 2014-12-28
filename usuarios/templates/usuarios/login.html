@@ -1,28 +1,36 @@
 {% extends "base.html" %}
 
-{% block Contents %}
-
-  {% if form.errors %}
-    <p class="error">Error, datos mal introducidos</p>
-  {% endif %}
-
-  <div class="row">
-    <div class="col-lg-offset-1 col-lg-3" style="background:#00f0db;">
-
-      <form action='.' method='post'> {% csrf_token %}
-        <div class="form-group">
-          <label for="username">Usuario:</label>
-          <input type="text" name="username" class="form-control" id="username">
+{% block Content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-offset-3 col-lg-5 span4 offset4 well">
+            {% if user.is_authenticated %}
+                <div class="alert alert-warning" role="alert">
+                    <a class="alert-link">!!!</a>Hay una sesión iniciada como '{{user.username}}'
+                </div>
+            {% else %}
+                <legend>Iniciar sesión</legend>
+            
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <a class="close" data-dismiss="alert" href="#">×</a>Nombre de usuario o Contraseña incorrecta!
+                    </div>
+                {% endif %}
+               
+                <form action='.' method='post'> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="username" class="span4" name="username" placeholder="Usuario">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" class="span4" name="password" placeholder="Contraseña">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember" value="1"> Mantener sesión
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-info btn-block" value="login">Entrar</button>
+                </form>
+            {% endif %}    
         </div>
-        <div class="form-group">
-          <label for="password">Clave de acceso:</label>
-          <input type="password" name="password" class="form-control" id="password">
-        </div>
-     
-        <input type="submit" value="login" />
-        <input type="hidden" name="next" class="btn btn-default" value="{{next}}" />
-      </form>
     </div>
-  </div>
-
+</div>
 {% endblock %}

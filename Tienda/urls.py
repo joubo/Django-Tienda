@@ -17,14 +17,11 @@ urlpatterns = patterns('',
 
     # Aplicacion articulos 
     #url(r'^articulos/', include('articulos.urls', namespace='articulos')),
-
-    #url(r'^$', TemplateView.as_view(template_name='index.html'), articulos.views.componentes, name='index'),
-    #url(r'^$', 'articulos.views.subcategoria', name='index'),
     
     # Aplicacion pedidos
     #url(r'^pedidos/', include('pedidos.urls', namespace='pedidos')),
     
     # Aplicacion usuarios
-    url(r'usuarios/', include('usuarios.urls', namespace='usuarios')),
+    url(r'^usuarios/', include('usuarios.urls', namespace='usuarios')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

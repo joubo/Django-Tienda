@@ -14,22 +14,36 @@
 
     <body>
         {% block Header %}
-            <div class="jumbotron">
-                <h1>Tienda OnLine</h1>
-           
+        <nav class="navbar navbar-inverse navbar-fixed-top color">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Tienda Online</a>
+                </div>
+                
+                {% if user.is_authenticated %}
+                <div class="navbar-collapse collapse navbar-right navbar-form">
+                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span>      
+                    <a href="/usuarios/logout"><button type="button" class="btn btn-success">{{user.username}}</button></a>
+                </div><!--/.navbar-collapse -->
+                {% else %}
+                <div id="navbar" class="navbar-collapse collapse">
+                    <div class="navbar-form navbar-right" action='.' method='post'> {% csrf_token %}
+                        <a href="/usuarios/login"><button type="submit" class="btn btn-success" value="login">Iniciar sesión</button></a>
+                        <a href="/usuarios/register"><button type="submit" class="btn btn-link" value="register">Registrarse</button></a>
+                    </div>
+                </div><!--/.navbar-collapse -->
+                {% endif %}
             </div>
-       <!--  {% if user.is_authenticated %}
-            <a>{{user.username}}</a>
-            <a href="/usuarios/logout">Cerrar sesion</a>
-        {% else %}
-            <a href="/usuarios/login">Iniciar sesion</a>
-            <a> o </a>
-            <a href="/usuarios/register">registrarse</a>
-            {% endif %} -->
+        </nav>
         {% endblock %}
   
     	{% block NavigationTop %}
-        <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>
         {% endblock %}
  
        
@@ -41,14 +55,19 @@
             </ul>
         {% endblock %}
      
-        {% block Contents %}
+    <div id="content">
+        {% block Content %}
             <h2>Bienvenido a la Tienda On Line</h2> 				
     	{% endblock %}
-        
+    </div>
 
-        {% block Footer %}
-           	&copy {% now "Y" %}, Jordi Bordoy Nieto
-        {% endblock %}
+    <div id="aside">
+    </div>
         
+    <div id="footer">
+        {% block Footer %}
+           	Copyright &copy {% now "Y" %}, Jordi Bordoy Nieto
+        {% endblock %}
+    </div>
   </body>
 </html> 

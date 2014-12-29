@@ -1,64 +1,72 @@
 {% extends 'base.html' %}
 
-{% block jquery %}
-	<script src="/static/js/jquery-1.11.2.min.js"></script>
-        <script>
-            $(document).ready(function(){
-
-                $(".helptext").hide();
-            });
-        </script>
+{% block focoNavLeft %}
+    <li><a href="/">Inicio</a></li>
+    <li><a href="#">Categorias</a></li>
+    <li><a href="#">Ofertas</a></li>
+    <li><a href="#">Cuenta</a></li>
 {% endblock %}
 
-{% block Content %}
+
+<!-- <script>
+    $(document).ready(function(){
+
+        $(".helptext").hide();
+    });
+</script> -->
+
+
+{% block content %}
 	<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
-            <legend><a href="http://www.jquery2dotnet.com"><i class="glyphicon glyphicon-globe"></i></a> Sign up!</legend>
-            <form action="#" method="post" class="form" role="form">
-            <div class="row">
-                <div class="col-xs-6 col-md-6">
-                    <input class="form-control" name="firstname" placeholder="First Name" type="text"
-                        required autofocus />
+    <div class="row" style="margin-top:20px;">
+        <div class="col-lg-offset-4 col-lg-5 span4 offset4 well">
+            <legend>Registrarse!</legend>
+            <form action="#" method="post" class="form" role="form"> {% csrf_token %}
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <input class="form-control" name="first_name" placeholder="Nombre" type="text" required autofocus />
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <input class="form-control" name="last_name" placeholder="Apellidos" type="text" required />
+                    </div>
                 </div>
-                <div class="col-xs-6 col-md-6">
-                    <input class="form-control" name="lastname" placeholder="Last Name" type="text" required />
-                </div>
-            </div>
-            <input class="form-control" name="youremail" placeholder="Your Email" type="email" />
-            <input class="form-control" name="reenteremail" placeholder="Re-enter Email" type="email" />
-            <input class="form-control" name="password" placeholder="New Password" type="password" />
-            <label for="">
-                Birth Date</label>
-            <div class="row">
-                <div class="col-xs-4 col-md-4">
-                    <select class="form-control">
-                        <option value="Month">Month</option>
-                    </select>
-                </div>
-                <div class="col-xs-4 col-md-4">
-                    <select class="form-control">
-                        <option value="Day">Day</option>
-                    </select>
-                </div>
-                <div class="col-xs-4 col-md-4">
-                    <select class="form-control">
-                        <option value="Year">Year</option>
-                    </select>
-                </div>
-            </div>
-            <label class="radio-inline">
-                <input type="radio" name="sex" id="inlineCheckbox1" value="male" />
-                Male
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="sex" id="inlineCheckbox2" value="female" />
-                Female
-            </label>
-            <br />
-            <br />
-            <button class="btn btn-info btn-block" type="submit">
-                Sign up</button>
+                <input class="form-control" name="username" placeholder="Usuario" type="text"/>
+                <input class="form-control" name="email" placeholder="Correo electrónico" type="email" />
+                <input class="form-control" name="password1" placeholder="Contraseña" type="password" />
+                <input class="form-control" name="password2" placeholder="Repetir contraseña" type="password" />
+                <input class="form-control" name="phone" placeholder="Teléfono" type="text"/>
+                <input class="form-control" name="dni" placeholder="DNI (opcional)" type="text"/>
+                <input class="form-control" name="address" placeholder="Dirección Postal (opcional)" type="text"/>
+
+                <!-- <label for="">
+                    Fecha de Nacimiento</label>
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <select class="form-control">
+                            <option value="Month">Mes</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <select class="form-control">
+                            <option value="Day">Día</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <select class="form-control">
+                            <option value="Year">Año</option>
+                        </select>
+                    </div>
+                </div> -->
+                <br />
+                <label class="radio-inline">
+                    <input type="radio" name="sex" id="inlineCheckbox1" value='H'/>Hombre
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="sex" id="inlineCheckbox2" value='M' />Mujer
+                </label>
+                <br />
+                <br />
+                <button class="btn btn-info btn-block" type="submit">Enviar registro</button>
             </form>
         </div>
     </div>

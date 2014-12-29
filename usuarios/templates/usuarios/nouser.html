@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 
-{% block Contents %}
+{% block focoNavLeft %}
+    <li><a href="/">Inicio</a></li>
+    <li><a href="#">Categorias</a></li>
+    <li><a href="#">Ofertas</a></li>
+    <li><a href="#">Cuenta</a></li>
+{% endblock %}
 
-  
-  
-  <p class="error">Error, usuario o clave de acceso incorrecto</p>
-  <br>
-  <br>
-
-  <form action='.' method='post'> {% csrf_token %}
-    <label for="username">Usuario:</label>
-    <input type="text" name="username" value="" id="username">
-    <label for="password">Clave de acceso:</label>
-    <input type="password" name="password" value="" id="password">
-
-    <input type="submit" value="login" />
-    <input type="hidden" name="next" value="{{next}}" />
-  </form>
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top:20px;">
+        <div class="col-lg-offset-4 col-lg-5 span4 offset4">
+            <div class="alert alert-danger">
+                <a href="/usuarios/login" class="close" data-dismiss="alert">&times;</a>
+                <strong>Error!</strong> No existe ningún usuario '{{user}}'
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

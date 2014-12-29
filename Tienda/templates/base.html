@@ -4,18 +4,48 @@
 <html>
     <head>  
         <meta charset="utf-8">
-        
-        {% block jquery %}
-        {% endblock %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
+        <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-        <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
         <title>Tienda Online</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="{{STATIC_URL}}css/jumbotron.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="{{STATIC_URL}}css/dashboard.css" rel="stylesheet">
+
+        <link href="{{STATIC_URL}}css/carousel.css" rel="stylesheet">
+
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]
+        <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]>-->
+
+        <!-- CAROUSEL -->
+        <script src="{{STATIC_URL}}js/jquery-1.11.2.min.js"></script>
+        <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>  
+
+
     </head>
 
     <body>
-        {% block Header %}
-        <nav class="navbar navbar-inverse navbar-fixed-top color">
-            <div class="container">
+        <!-- BARRA NAVEGACION SUPERIOR -->
+        {% block header %}
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
@@ -28,46 +58,114 @@
                 
                 {% if user.is_authenticated %}
                 <div class="navbar-collapse collapse navbar-right navbar-form">
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span>      
-                    <a href="/usuarios/logout"><button type="button" class="btn btn-success">{{user.username}}</button></a>
+                    <a href="/usuarios/logout"><button type="button" class="btn btn-success">{{user.username}}</button></a>   
+                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span>   
                 </div><!--/.navbar-collapse -->
                 {% else %}
-                <div id="navbar" class="navbar-collapse collapse">
-                    <div class="navbar-form navbar-right" action='.' method='post'> {% csrf_token %}
-                        <a href="/usuarios/login"><button type="submit" class="btn btn-success" value="login">Iniciar sesión</button></a>
-                        <a href="/usuarios/register"><button type="submit" class="btn btn-link" value="register">Registrarse</button></a>
-                    </div>
+                <div class="navbar-collapse collapse navbar-right navbar-form">
+                    <a href="/usuarios/login"><button type="submit" class="btn btn-success" value="login">Iniciar sesión</button></a>
+                    <a href="/usuarios/register"><button type="submit" class="btn btn-warning" value="register">Registrarse</button></a>
                 </div><!--/.navbar-collapse -->
                 {% endif %}
             </div>
         </nav>
         {% endblock %}
-  
-    	{% block NavigationTop %}
-        {% endblock %}
- 
-       
-        {% block NavigationLeft %}
-            <ul class="nav nav-pills nav-stacked">
-                <li role="presentation" class="active"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">Profile</a></li>
-                <li role="presentation"><a href="#">Messages</a></li>
-            </ul>
-        {% endblock %}
-     
-    <div id="content">
-        {% block Content %}
-            <h2>Bienvenido a la Tienda On Line</h2> 				
-    	{% endblock %}
-    </div>
+        <!-- FIN BARRA NAVEGACION SUPERIOR -->
 
-    <div id="aside">
-    </div>
-        
-    <div id="footer">
-        {% block Footer %}
-           	Copyright &copy {% now "Y" %}, Jordi Bordoy Nieto
+        <!-- BARRA NAVEGACION IZQUIERDA -->
+        {% block navigationLeft %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        {% block focoNavLeft %}
+                        <li class="active"><a href="/">Inicio <span class="sr-only">(current)</span></a></li>
+                        {% if user.is_superuser %}
+                            <li><a href="/usuarios/listaUsuarios/">Usuarios</a></li>
+                        {% endif %}
+                        <li><a href="#">Categorias</a></li>
+                        <li><a href="#">Ofertas</a></li>
+                        <li><a href="#">Cuenta</a></li>
+                        {% endblock %}
+                    </ul>
+                </div>
+            </div>
+        </div>
         {% endblock %}
-    </div>
-  </body>
+        <!-- FIN BARRA NAVEGACION IZQUIERDA -->
+
+        <!-- CONTENIDO -->
+        <!-- CAROUSEL -->
+        {% block content %}
+        <div class="col-md-8 col-md-offset-3" style="margin-top:20px;">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+      
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="{{MEDIA_URL}}carousel/carousel1.jpg" alt="First slide">
+                        <div class="container-fluid">
+                            <div class="carousel-caption">
+                                <!-- <h1>Another example headline.</h1>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> -->
+                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Leer más</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{{MEDIA_URL}}carousel/carousel2.jpg" alt="Second slide">
+                        <div class="container-fluid">
+                            <div class="carousel-caption">
+                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Leer más</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{{MEDIA_URL}}carousel/carousel3.jpg" alt="Third slide">
+                        <div class="container-fluid">
+                            <div class="carousel-caption">
+                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Leer más</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <script>
+            $('.carousel').carousel({
+                interval: 5000
+            })
+        </script>
+        <!-- FIN CAROUSEL -->
+    	{% endblock %}
+        <!-- FIN CONTENIDO -->
+
+        <!-- PIE DE PAGINA -->
+        {% block footer %}
+        <div class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="panel-body" style="color:grey;">
+                Copyright &copy {% now "Y" %}, Jordi Bordoy Nieto
+            </div>
+        </div>
+        {% endblock %}
+        <!-- FIN DE PIE DE PAGINA -->
+
+    </body>
 </html> 

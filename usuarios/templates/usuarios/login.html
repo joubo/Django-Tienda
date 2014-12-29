@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 
-{% block Content %}
+{% block focoNavLeft %}
+    <li><a href="/">Inicio</a></li>
+    <li><a href="#">Categorias</a></li>
+    <li><a href="#">Ofertas</a></li>
+    <li><a href="#">Cuenta</a></li>
+{% endblock %}
+
+{% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-lg-offset-3 col-lg-5 span4 offset4 well">
+    <div class="row" style="margin-top:20px;">
+        <div class="col-lg-offset-4 col-lg-5 span4 offset4 well">
             {% if user.is_authenticated %}
-                <div class="alert alert-warning" role="alert">
-                    <a class="alert-link">!!!</a>Hay una sesión iniciada como '{{user.username}}'
+                <div class="alert alert-warning" well>
+                    <a href="/" class="close" data-dismiss="alert">&times;</a>
+                    <strong>!!!</strong> Hay una sesión iniciada como '{{user.username}}'
                 </div>
             {% else %}
                 <legend>Iniciar sesión</legend>
             
                 {% if form.errors %}
                     <div class="alert alert-danger">
-                        <a class="close" data-dismiss="alert" href="#">×</a>Nombre de usuario o Contraseña incorrecta!
+                        <a class="close" data-dismiss="alert" href="#">×</a> Datos introducidos incorrectos!
                     </div>
                 {% endif %}
                

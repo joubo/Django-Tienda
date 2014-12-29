@@ -9,11 +9,17 @@ from django.views.generic import ListView, View
 
 # Create your views here.
 
-#@user_passes_test(lambda u: u.is_superuser,login_url='/usuarios/login')
-class UserListView(ListView):
-	model = User
-	context_object_name = 'listaUsuarios'
-	template_name = 'usuarios/listaUsuarios.html'
+@user_passes_test(lambda u: u.is_superuser,login_url='/')
+def listaUsuarios(request):
+	listaUsuarios = User.objects.all().order_by("username")
+	context = { 'listaUsuarios' : listaUsuarios}
+	return render(request, 'usuarios/listaUsuarios.html', context)
+
+@login_required(login_url='/usuarios/login')
+def detalleUsuario(request, usuario_id):
+	usuario = User.objects.get(pk=usuario_id)
+	context = {'usuario' : usuario}
+	return render(request, 'usuarios/usuario.html', context)
 
 def userRegister(request):
 	form = MyUserCreationForm(request.POST)
@@ -40,9 +46,11 @@ def userLogin(request):
 					login(request, access)
 					return redirect('/')
 				else:
-					return render(request, 'usuarios/inactive.html')
+					context = {'user': user}
+					return render(request,'usuarios/inactive.html', context)
 			else:
-				return render(request, 'usuarios/nouser.html')
+				context = {'user': user}
+				return render(request,'usuarios/nouser.html', context)
 	else:
 		form = AuthenticationForm()
 
@@ -53,4 +61,10 @@ def userLogin(request):
 def userLogout(request):
     logout(request)
     # Redirect to a success page.
-    return redirect('/')
+    return redirect('/usuarios/login')
+
+@user_passes_test(lambda u: u.is_superuser,login_url='/')
+def eliminarUsuario(request, usuario_id):
+	user = User.objects.get(pk=usuario_id)
+	user.delete()
+	return redirect('/usuarios/listaUsuarios')

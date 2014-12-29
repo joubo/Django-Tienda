@@ -10,4 +10,14 @@ class MyUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'dni', 'phone', 'address')
+        fields = ('first_name', 'last_name', 'username', 'email', 'dni', 'phone', 'address','sex')
+
+    def clean_username(self):
+	    username = self.cleaned_data['username']
+	    try:
+	        User.objects.get(username=username)
+	    except User.DoesNotExist:
+	    	return username
+	   	raise forms.ValidationError("El usuario {{username}} ya existe.")
+
+	    

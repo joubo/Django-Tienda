@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block focoNavLeft %}
+<li><a href="/">Inicio</a></li>
+{% if user.is_superuser %}
+    <li class="active"><a href="/usuarios/listaUsuarios/">Usuarios<span class="sr-only">(current)</span></a></li>
+{% endif %}
+<li><a href="#">Categorias</a></li>
+<li><a href="#">Ofertas</a></li>
+<li><a href="#">Cuenta</a></li>
+{% endblock %}
+
+{% block content %}
+{% if user.pk == usuario.pk or user.is_superuser %} 
+<div class="container">
+	<div class="row" style="margin-top:20px;">
+		<div class="col-lg-offset-4 col-lg-5 span4 offset4 well">
+            <legend>Modificar Usuario: {{usuario.username}}</legend>
+            <form action="#" method="post" class="form" role="form"> {% csrf_token %}
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <input class="form-control" name="first_name" value="{{usuario.first_name}}" type="text" required />
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <input class="form-control" name="last_name" value='{{usuario.last_name}}' type="text" required />
+                    </div>
+                </div>
+                <input class="form-control" name="username" value="{{usuario.username}}" type="text"/>
+                <input class="form-control" name="email" value="{{usuario.email}}" type="email" />
+                <input class="form-control" name="password1" placeholder="Contraseña" type="password" style="border-color:red"/>
+                <input class="form-control" name="password2" placeholder="Repetir contraseña" type="password" style="border-color:red" />
+                <input class="form-control" name="phone" value="{{usuario.phone}}" type="text"/>
+                <input class="form-control" name="dni" value="{{usuario.dni}}" type="text"/>
+                <input class="form-control" name="address" value="{{usuario.address}}" type="text"/>
+                <br />
+                <label class="radio-inline">
+                    <input type="radio" name="sex" id="inlineCheckbox1" value='H'
+                    {% if usuario.sex == 'H' %}
+                    	checked
+                    {% endif %}
+                    />Hombre
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="sex" id="inlineCheckbox2" value='M' 
+                    {% if usuario.sex == 'M' %}
+                    	checked
+                    {% endif %}
+                    />Mujer
+                </label>
+                <br />
+                <br />
+                <button class="btn btn-info btn-block" type="submit">Confirmar cambios</button>
+                <a href='/'><button class="btn btn-danger btn-block" type="button">Salir</button></a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+

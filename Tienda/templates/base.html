@@ -58,12 +58,23 @@
                 
                 {% if user.is_authenticated %}
                 <div class="navbar-collapse collapse navbar-right navbar-form">
-                    <a href="/usuarios/logout"><button type="button" class="btn btn-success">{{user.username}}</button></a>   
                     <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span>   
-                </div><!--/.navbar-collapse -->
+                </div>
+                <!-- Single button -->
+                <div class="btn-group navbar-collapse collapse navbar-right navbar-form">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    {{user.username}} 
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu navbar-collapse navbar-right navbar-inverse" role="menu" style="background-color:transparent; border:0">
+                        <li><a href="/usuarios/usuario/{{user.pk}}"><button type="button" class="btn btn-info pull-right">Cuenta</button></a></li>
+                        <li><a href="/usuarios/logout"><button type="button" class="btn btn-info pull-right">Cerrar sesión</button></a></li>
+                    </ul>
+                </div>
+                <!--/.navbar-collapse -->
                 {% else %}
-                <div class="navbar-collapse collapse navbar-right navbar-form">
-                    <a href="/usuarios/login"><button type="submit" class="btn btn-success" value="login">Iniciar sesión</button></a>
+                <div class="navbar-collapse collapse navbar-form navbar-right">
+                    <a href="/usuarios/login"><button type="submit" class="btn btn-success right" value="login">Iniciar sesión</button></a>
                     <a href="/usuarios/register"><button type="submit" class="btn btn-warning" value="register">Registrarse</button></a>
                 </div><!--/.navbar-collapse -->
                 {% endif %}

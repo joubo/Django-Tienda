@@ -15,6 +15,6 @@ urlpatterns = patterns('',
 	url(r'^listaUsuarios/$', views.listaUsuarios, name ='listaUsuarios'),
 	url(r'^usuario/(?P<usuario_id>\d+)/$', views.detalleUsuario, name = "detalleUsuario"),
 	url(r'^usuario/eliminarUsuario/(?P<usuario_id>\d+)/$',views.eliminarUsuario, name = "eliminarUsuario"),
-
+	url(r'^usuario/modificarUsuario/(?P<usuario_id>\d+)/$',views.modificarUsuario, name = "modificarUsuario"),
 
 )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

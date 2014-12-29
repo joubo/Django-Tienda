@@ -1,25 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.contrib.auth.decorators import login_required, user_passes_test
 from forms import MyUserCreationForm
-from django.views.generic import ListView, View
 
 # Create your views here.
-
-@user_passes_test(lambda u: u.is_superuser,login_url='/')
-def listaUsuarios(request):
-	listaUsuarios = User.objects.all().order_by("username")
-	context = { 'listaUsuarios' : listaUsuarios}
-	return render(request, 'usuarios/listaUsuarios.html', context)
-
-@login_required(login_url='/usuarios/login')
-def detalleUsuario(request, usuario_id):
-	usuario = User.objects.get(pk=usuario_id)
-	context = {'usuario' : usuario}
-	return render(request, 'usuarios/usuario.html', context)
 
 def userRegister(request):
 	form = MyUserCreationForm(request.POST)
@@ -64,7 +51,35 @@ def userLogout(request):
     return redirect('/usuarios/login')
 
 @user_passes_test(lambda u: u.is_superuser,login_url='/')
+def listaUsuarios(request):
+	listaUsuarios = User.objects.all().order_by("username")
+	context = { 'listaUsuarios' : listaUsuarios}
+	return render(request, 'usuarios/listaUsuarios.html', context)
+
+@login_required(login_url='/usuarios/login')
+def detalleUsuario(request, usuario_id):
+	usuario = User.objects.get(pk=usuario_id)
+	context = {'usuario' : usuario}
+	return render(request, 'usuarios/usuario.html', context)
+
+@login_required(login_url='/usuarios/login')
 def eliminarUsuario(request, usuario_id):
-	user = User.objects.get(pk=usuario_id)
-	user.delete()
-	return redirect('/usuarios/listaUsuarios')
+	usuario = User.objects.get(pk=usuario_id)
+	usuario.delete()
+	return redirect('/')
+
+@login_required(login_url='/usuarios/login')
+def modificarUsuario(request, usuario_id):
+	usuario = User.objects.get(pk=usuario_id)
+	if request.method == 'POST':
+		form = MyUserCreationForm(request.POST, request.FILES, instance=usuario)
+		if form.is_valid():
+			form.save()
+			usuario=User.objects.get(pk=usuario_id)
+			context = {'usuario' : usuario}
+			return render(request, 'usuarios/usuario.html', context)
+	else:
+		form = MyUserCreationForm(instance=usuario)
+	context = {'form':form, 'usuario':usuario}
+	return render(request, 'usuarios/modificarUsuario.html', context)
+

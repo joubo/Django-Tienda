@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+    <h2>Listado de Articulos</h2>
+    <a href='/articulos/nuevoArticulo'>Añadir Artículo</a>
+    <br>
+    <br>
+    {% for articulo in listaArticulos %}
+    <ul>
+    	<li>
+        	<a href='/articulos/articulo/{{articulo.id}}'>{{articulo.nombre}}</a>
+    	</li>
+    </ul>
+    {% endfor %}
+{% endblock %}

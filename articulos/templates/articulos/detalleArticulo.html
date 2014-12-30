@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+    <h2>Detalles de: {{articulo.nombre}}</h2> 
+    {% if articulo %}
+    <a href='/articulos/eliminarArticulo/{{articulo.id}}'>Eliminar Artículo</a>
+    <br>
+    <br>
+    <ul>
+        <li>Nombre: {{articulo.nombre}}</li>
+        <li>Precio: {{articulo.precio}} €</li>
+        <li>Descuento: {{articulo.descuento}} %</li>
+        <li>Stock: {{articulo.stock}} unidades</li>
+        <li>Categoria: {{articulo.categoria}}</li>
+        <li>Fabricante: {{articulo.fabricante}}</li>
+        <li>Descripcion: {{articulo.decripcion}}</li>
+        <br>
+        <img style="width: 150px; height:150px;" src='{{MEDIA_URL}}{{articulo.imagen}}' alt=""/><br>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+    <h2>Listado de Fabricantes</h2> 
+    <a href='/articulos/nuevoFabricante'>Añadir Fabricante</a>
+    <br>
+    <br>
+    {% for fabricante in listaFabricantes %}
+    <ul>
+        <li>
+            <a href='/articulos/fabricante/{{fabricante.id}}'>{{fabricante.nombre}}</a>
+        </li>
+    </ul>
+    {% endfor %}
+{% endblock %}

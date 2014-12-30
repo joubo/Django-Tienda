@@ -3,16 +3,6 @@
 {% load static %}
 {% load staticfiles %}
 
-{% block focoNavLeft %}
-<li><a href="/">Inicio</a></li>
-{% if user.is_superuser %}
-    <li class="active"><a href="/usuarios/listaUsuarios/">Usuarios<span class="sr-only">(current)</span></a></li>
-{% endif %}
-<li><a href="#">Categorias</a></li>
-<li><a href="#">Ofertas</a></li>
-<li><a href="#">Cuenta</a></li>
-{% endblock %}
-
 {% block content %}
 <div class="col-md-8 col-md-offset-2">
     <h2>Listado de Usuarios</h2> 

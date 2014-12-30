@@ -16,7 +16,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # Aplicacion articulos 
-    #url(r'^articulos/', include('articulos.urls', namespace='articulos')),
+    url(r'^articulos/', include('articulos.urls', namespace='articulos')),
+    url(r'^categorias/', include('articulos.urls', namespace='articulos')),
+    url(r'^marcas/', include('articulos.urls', namespace='articulos')),
     
     # Aplicacion pedidos
     #url(r'^pedidos/', include('pedidos.urls', namespace='pedidos')),

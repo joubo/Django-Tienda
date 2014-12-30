@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+    <h2>Detalles de: {{fabricante.nombre}}</h2> 
+    {% if fabricante %}
+     <a href='/articulos/eliminarFabricante/{{fabricante.id}}'>Eliminar Fabricante</a>
+    <br>
+    <br>
+    <ul>
+        <li>Nombre: {{fabricante.nombre}}</li>
+        <br>
+        <img style="width: 150px; height:150px;" src='{{MEDIA_URL}}{{fabricante.imagen}}' alt=""/><br>
+    {% endif %}
+</div>
+{% endblock %}

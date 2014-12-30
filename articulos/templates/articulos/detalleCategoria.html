@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+    <h2>Detalles de: {{categoria.nombre}}</h2> 
+    {% if categoria %}
+     <a href='/articulos/eliminarCategoria/{{categoria.id}}'>Eliminar Categoría</a>
+    <br>
+    <br>
+    <ul>
+        <li>Nombre: {{categoria.nombre}}</li>
+        <li>Descripcion: {{categoria.decripcion}}</li>
+        <br>
+        <img style="width: 150px; height:150px;" src='{{MEDIA_URL}}{{categoria.imagen}}' alt=""/><br>
+    {% endif %}
+</div>
+{% endblock %}

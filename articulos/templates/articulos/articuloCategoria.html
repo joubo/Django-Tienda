@@ -8,23 +8,20 @@
 {% if user.is_superuser %}
     <li><a href="/usuarios/listaUsuarios/">Usuarios</a></li>
 {% endif %}
-<li class="active"><a href="/articulos/listaArticulos/">Articulos</a></li>
-<li><a href="/articulos/listaCategorias/">Categorias</a></li>
+<li><a href="/articulos/listaArticulos/">Articulos</a></li>
+<li class="active"><a href="/articulos/listaCategorias/">Categorias</a></li>
 <li><a href="/articulos/listaFabricantes/">Fabricantes</a></li>
 <li><a href="#">Ofertas</a></li>
 {% endblock %}
 
 {% block content %}
 <div class="col-md-8 col-md-offset-2">
-    <h2>Listado de Articulos</h2>
-    {% if user.is_superuser %}
-        <a href='/articulos/nuevoArticulo'>Añadir Artículo</a>
-    {% endif %}
+    <h2>Listado de {{categoria}}:</h2>
     <br>
     <br>
     <div class="list-group">
-        {% for articulo in listaArticulos %}
-            <a class="list-group-item" href='/articulos/detalleArticulo/{{articulo.id}}'>{{articulo.nombre}}</a>
-    	{% endfor %}
+        {% for articulo in articulos %}
+            <a class="list-group-item" href='/articulos/detalleArticulo/{{articulo.id}}'>{{articulo.nombre}} - {{articulo.precio}} €</a>
+        {% endfor %}
     </div>
 {% endblock %}

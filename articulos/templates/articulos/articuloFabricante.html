@@ -16,16 +16,12 @@
 
 {% block content %}
 <div class="col-md-8 col-md-offset-2">
-    <h2>Detalles de: {{fabricante.nombre}}</h2> 
-    {% if fabricante %}
-     <a href='/articulos/eliminarFabricante/{{fabricante.id}}'>Eliminar</a>
-     <a href='/articulos/editarFabricante/{{fabricante.id}}'>Editar</a>
+    <h2>Listado de {{fabricante}}:</h2>
     <br>
     <br>
-    <ul>
-        <li>Nombre: {{fabricante.nombre}}</li>
-        <br>
-        <img style="width: 150px; height:150px;" src='{{MEDIA_URL}}{{fabricante.imagen}}' alt=""/><br>
-    {% endif %}
-</div>
+    <div class="list-group">
+        {% for articulo in articulos %}
+            <a class="list-group-item" href='/articulos/detalleArticulo/{{articulo.id}}'>{{articulo.nombre}} - {{articulo.precio}} €</a>
+        {% endfor %}
+    </div>
 {% endblock %}

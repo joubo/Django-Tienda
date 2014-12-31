@@ -3,11 +3,25 @@
 {% load static %}
 {% load staticfiles %}
 
+{% block focoNavLeft %}
+<li><a href="/">Inicio <span class="sr-only">(current)</span></a></li>
+{% if user.is_superuser %}
+    <li><a href="/usuarios/listaUsuarios/">Usuarios</a></li>
+{% endif %}
+<li class="active"><a href="/articulos/listaArticulos/">Articulos</a></li>
+<li><a href="/articulos/listaCategorias/">Categorias</a></li>
+<li><a href="/articulos/listaFabricantes/">Fabricantes</a></li>
+<li><a href="#">Ofertas</a></li>
+{% endblock %}
+
 {% block content %}
 <div class="col-md-8 col-md-offset-2">
     <h2>Detalles de: {{articulo.nombre}}</h2> 
     {% if articulo %}
-    <a href='/articulos/eliminarArticulo/{{articulo.id}}'>Eliminar Artículo</a>
+        {% if user.is_superuser %}
+            <a href='/articulos/eliminarArticulo/{{articulo.id}}'>Eliminar</a>
+            <a href='/articulos/editarArticulo/{{articulo.id}}'>Editar</a>
+        {% endif %}
     <br>
     <br>
     <ul>
@@ -17,7 +31,7 @@
         <li>Stock: {{articulo.stock}} unidades</li>
         <li>Categoria: {{articulo.categoria}}</li>
         <li>Fabricante: {{articulo.fabricante}}</li>
-        <li>Descripcion: {{articulo.decripcion}}</li>
+        <li>Descripcion: {{articulo.descripcion}}</li>
         <br>
         <img style="width: 150px; height:150px;" src='{{MEDIA_URL}}{{articulo.imagen}}' alt=""/><br>
     {% endif %}

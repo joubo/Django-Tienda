@@ -16,15 +16,10 @@
 
 {% block content %}
 <div class="col-md-8 col-md-offset-2">
-    <h2>Listado de Articulos</h2>
-    {% if user.is_superuser %}
-        <a href='/articulos/nuevoArticulo'>Añadir Artículo</a>
-    {% endif %}
-    <br>
-    <br>
-    <div class="list-group">
-        {% for articulo in listaArticulos %}
-            <a class="list-group-item" href='/articulos/detalleArticulo/{{articulo.id}}'>{{articulo.nombre}}</a>
-    	{% endfor %}
-    </div>
+	<h2>Editar Artículo</h2> 
+	<form action="" method="post">{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Update" />
+	</form>
+</div>
 {% endblock %}

@@ -23,7 +23,6 @@ class Fabricante(models.Model):
 
 class Articulo(models.Model):
 	nombre = models.CharField(max_length=30, unique = True, null = False, default='')
-	precio = models.IntegerField()
 	descripcion = models.TextField(blank = True, null = True)
 	imagen = models.ImageField(upload_to='articulos', verbose_name='Imagen', default = '')
 	precio = models.DecimalField(default=0, max_digits=6, decimal_places=2)

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.views.generic import ListView, View, DetailView, CreateView, DeleteView
+from django.views.generic import ListView, View, DetailView, CreateView, DeleteView, UpdateView
 from articulos.models import Articulo, Categoria, Fabricante
 from django.core.urlresolvers import reverse_lazy
 
@@ -40,6 +40,12 @@ class EliminarFabricanteView(DeleteView):
 	success_url = reverse_lazy('listaFabricantes')
 
 
+class EditarFabricanteView(UpdateView):
+	model = Fabricante
+	fields = '__all__'
+	success_url= '/articulos/listaFabricantes'
+	template_name = 'articulos/editarFabricante.html'
+
 
 
 # CATEGORIAS
@@ -74,6 +80,12 @@ class EliminarCategoriaView(DeleteView):
 	model = Categoria
 	template_name = 'articulos/borrarConfirmar.html'
 	success_url = reverse_lazy('listaCategorias')
+
+class EditarCategoriaView(UpdateView):
+	model = Categoria
+	fields = '__all__'
+	success_url= '/articulos/listaCategorias'
+	template_name = 'articulos/editarCategoria.html'
 
 
 
@@ -110,3 +122,32 @@ class EliminarArticuloView(DeleteView):
 	model = Articulo
 	template_name = 'articulos/borrarConfirmar.html'
 	success_url = reverse_lazy('listaArticulos')
+
+class EditarArticuloView(UpdateView):
+	model = Articulo
+	fields = '__all__'
+	success_url= '/articulos/listaArticulos'
+	template_name = 'articulos/editarArticulo.html'
+
+
+# ARTICULOS POR CATEGORIA
+
+def articuloCategoria(request, categoria_id):
+
+	categoria = Categoria.objects.get(pk=categoria_id)
+	articulos = Articulo.objects.filter(categoria=categoria)
+	articulos=articulos.order_by("nombre")
+	context = {'categoria' : categoria, 'articulos' : articulos}
+	return render(request, 'articulos/articuloCategoria.html', context)
+
+
+# ARTICULOS POR FABRICANTE
+
+def articuloFabricante(request, fabricante_id):
+
+	fabricante = Fabricante.objects.get(pk=fabricante_id)
+	articulos = Articulo.objects.filter(fabricante=fabricante)
+	articulos=articulos.order_by("nombre")
+	context = {'fabricante' : fabricante, 'articulos' : articulos}
+	return render(request, 'articulos/articuloFabricante.html', context)
+

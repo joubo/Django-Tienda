@@ -8,7 +8,7 @@ from articulos import views
 
 
 urlpatterns = patterns('',
-	url(r'^$', TemplateView.as_view(template_name='articulos/index.html'),name='index'),
+	url(r'^$', TemplateView.as_view(template_name='articulos/templates/articulos/index.html'),name='index'),
 	
 	url(r'^listaFabricantes/$', FabricantesListView.as_view(), name ='listaFabricantes'),
 	url(r'^detalleFabricante/(?P<pk>\d+)/$', FabricanteDetailView.as_view(), name='detalleFabricante'),

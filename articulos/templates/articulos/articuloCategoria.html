@@ -3,17 +3,6 @@
 {% load static %}
 {% load staticfiles %}
 
-{% block focoNavLeft %}
-<li><a href="/">Inicio <span class="sr-only">(current)</span></a></li>
-{% if user.is_superuser %}
-    <li><a href="/usuarios/listaUsuarios/">Usuarios</a></li>
-{% endif %}
-<li><a href="/articulos/listaArticulos/">Articulos</a></li>
-<li class="active"><a href="/articulos/listaCategorias/">Categorias</a></li>
-<li><a href="/articulos/listaFabricantes/">Fabricantes</a></li>
-<li><a href="#">Ofertas</a></li>
-{% endblock %}
-
 {% block content %}
 <div class="col-md-8 col-md-offset-2">
     <h2>Listado de {{categoria}}:</h2>

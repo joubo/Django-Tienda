@@ -17,11 +17,11 @@ urlpatterns = patterns('',
 
     # Aplicacion articulos 
     url(r'^articulos/', include('articulos.urls', namespace='articulos')),
-    url(r'^categorias/', include('articulos.urls', namespace='articulos')),
-    url(r'^marcas/', include('articulos.urls', namespace='articulos')),
+    # url(r'^categorias/', include('articulos.urls', namespace='articulos')),
+    # url(r'^fabricantes/', include('articulos.urls', namespace='articulos')),
     
     # Aplicacion pedidos
-    #url(r'^pedidos/', include('pedidos.urls', namespace='pedidos')),
+    url(r'^pedidos/', include('pedidos.urls', namespace='pedidos')),
     
     # Aplicacion usuarios
     url(r'^usuarios/', include('usuarios.urls', namespace='usuarios')),

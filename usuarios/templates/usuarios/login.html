@@ -18,15 +18,12 @@
                     </div>
                 {% endif %}
                
-                <form action='.' method='post'> {% csrf_token %}
+                <form action='.' method="POST"> {% csrf_token %}
                     <div class="form-group">
                         <input type="text" id="username" class="span4" name="username" placeholder="Usuario">
                     </div>
                     <div class="form-group">
                         <input type="password" id="password" class="span4" name="password" placeholder="Contraseña">
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="remember" value="1"> Mantener sesión
                     </div>
                     <button type="submit" name="submit" class="btn btn-info btn-block" value="login">Entrar</button>
                 </form>

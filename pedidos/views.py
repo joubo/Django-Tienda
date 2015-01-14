@@ -30,13 +30,18 @@ def agregarPedido(request, articulo_id):
 
 def facturarPedido(request):
 
-	p = Pedido.objects.get(usuario = request.user, estado = 'PE')
+	try:
+		p = Pedido.objects.get(usuario = request.user, estado = 'PE')
+	except Pedido.DoesNotExist:
+		p = None
 
-	f = Factura()
-	f.pedido = p
-	f.save()
+	if p is not None:
 
-	p.estado = 'PA'
-	p.save()
+		f = Factura()
+		f.pedido = p
+		f.save()
+
+		p.estado = 'PA'
+		p.save()
 
 	return redirect	('/')

@@ -4,16 +4,15 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
-from forms import MyUserCreationForm
+from forms import MyUserCreationForm, MyUserEditForm
 
 # Create your views here.
 
 def userRegister(request):
-	form = MyUserCreationForm(request.POST)
 	if request.method == 'POST':
-		data = request.POST.copy()
-		if form.is_valid:
-			new_user = form.save(data)
+		form = MyUserCreationForm(data=request.POST)
+		if form.is_valid():
+			form.save()
 			return redirect('/usuarios/login')
 	else:
 		form = MyUserCreationForm()
@@ -23,8 +22,8 @@ def userRegister(request):
 
 def userLogin(request):
 	if request.method == 'POST':
-		form = AuthenticationForm(request.POST)
-		if form.is_valid:
+		form = AuthenticationForm(data=request.POST)
+		if form.is_valid():
 			user = request.POST['username']
 			passwd = request.POST['password']
 			access = authenticate(username=user, password=passwd)
@@ -72,14 +71,14 @@ def eliminarUsuario(request, usuario_id):
 def modificarUsuario(request, usuario_id):
 	usuario = User.objects.get(pk=usuario_id)
 	if request.method == 'POST':
-		form = MyUserCreationForm(request.POST, request.FILES, instance=usuario)
-		if form.is_valid():
+		form = MyUserEditForm(request.POST, request.FILES, instance=usuario)
+		if form.is_valid:
 			form.save()
 			usuario=User.objects.get(pk=usuario_id)
 			context = {'usuario' : usuario}
 			return render(request, 'usuarios/usuario.html', context)
 	else:
-		form = MyUserCreationForm(instance=usuario)
+		form = MyUserEditForm(instance=usuario)
 	context = {'form':form, 'usuario':usuario}
 	return render(request, 'usuarios/modificarUsuario.html', context)
 

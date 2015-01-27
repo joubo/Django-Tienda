@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse_lazy
 class FabricantesListView(ListView):
 	model = Fabricante
 	context_object_name = 'listaFabricantes'
+	queryset = Fabricante.objects.order_by('nombre')
 	template_name = 'articulos/listaFabricantes.html'
 
 class FabricanteDetailView(DetailView):
@@ -55,6 +56,7 @@ class EditarFabricanteView(UpdateView):
 class CategoriasListView(ListView):
 	model = Categoria
 	context_object_name = 'listaCategorias'
+	queryset = Categoria.objects.order_by('nombre')
 	template_name = 'articulos/listaCategorias.html'
 
 class CategoriaDetailView(DetailView):
@@ -97,6 +99,7 @@ class EditarCategoriaView(UpdateView):
 class ArticulosListView(ListView):
 	model = Articulo
 	context_object_name = 'listaArticulos'
+	queryset = Articulo.objects.order_by('nombre')
 	template_name = 'articulos/listaArticulos.html'
 
 class ArticuloDetailView(DetailView):

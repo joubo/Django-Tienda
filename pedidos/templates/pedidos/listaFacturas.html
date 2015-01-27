@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block focoNavLeft %}
+<li><a href="/">Inicio</a></li>
+{% if user.is_superuser %}
+    <li><a href="/usuarios/listaUsuarios/">Usuarios</a></li>
+{% endif %}
+<li><a href="/articulos/listaArticulos/">Articulo</a></li>
+<li><a href="/articulos/listaCategorias/">Categorias</a></li>
+<li><a href="/articulos/listaFabricantes/">Fabricantes</a></li>
+<li><a href="#">Ofertas</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+    <h2>Listado de Facturas: </h2>
+        
+    {% if listaFacturas %}
+        <br>
+        <div class="container">  
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nº Factura</th>
+                        <th>Fecha</th>
+                        <th>Ver</th>
+                    </tr>
+                </thead>
+                {% for factura in listaFacturas %}
+                <tbody>
+                    <tr>
+                        <td>{{factura.id}}</td>
+                        <td>{{factura.fecha}}</td>
+                        <td><a href="/pedidos/detalleFactura/{{factura.id}}"><button type="button" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            </button></a>
+                        </td>
+                    </tr>
+                </tbody>      
+                {% endfor %}
+            </table>
+        </div>    
+    {% else %}
+        <p>No existe ninguna factura</p>
+    {% endif %}
+</div>
+{% endblock %}

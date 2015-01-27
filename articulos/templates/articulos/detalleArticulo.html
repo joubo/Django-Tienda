@@ -17,9 +17,8 @@
 {% block content %}
 <div class="col-md-8 col-md-offset-2">
     <h2>Detalles de: {{articulo.nombre}}</h2>
-    <a href='/pedidos/agregarPedido/{{articulo.id}}'><button class="btn btn-info" type="submit">Añadir al Carrito</button></a>
-    <a href='/pedidos/facturarPedido/'><button class="btn btn-info" type="submit">Pagar</button></a>
-    {% if articulo %}
+<!--     <a href='/pedidos/facturarPedido/'><button class="btn btn-info" type="submit">Pagar</button></a>
+ -->    {% if articulo %}
         {% if user.is_superuser %}
             <a href='/articulos/eliminarArticulo/{{articulo.id}}'>Eliminar</a>
             <a href='/articulos/editarArticulo/{{articulo.id}}'>Editar</a>
@@ -35,7 +34,11 @@
         <li>Fabricante: {{articulo.fabricante}}</li>
         <li>Descripcion: {{articulo.descripcion}}</li>
         <br>
+        <a href='/pedidos/agregarPedido/{{articulo.id}}'><button class="btn btn-info" type="submit">Añadir al Carrito</button></a>
+        <br>
+        <br>
         <img style="width: 150px; height:150px;" src='{{MEDIA_URL}}{{articulo.imagen}}' alt=""/><br>
+    </ul>
     {% endif %}
 </div>
 {% endblock %}

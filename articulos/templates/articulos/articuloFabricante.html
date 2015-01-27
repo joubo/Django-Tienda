@@ -16,12 +16,26 @@
 
 {% block content %}
 <div class="col-md-8 col-md-offset-2">
-    <h2>Listado de {{fabricante}}:</h2>
-    <br>
-    <br>
-    <div class="list-group">
-        {% for articulo in articulos %}
-            <a class="list-group-item" href='/articulos/detalleArticulo/{{articulo.id}}'>{{articulo.nombre}} - {{articulo.precio}} €</a>
-        {% endfor %}
-    </div>
+	<h2>Listado de {{fabricante}}:</h2>
+	<br>
+	<br>
+	<div class="list-group">
+	    {% for articulo in articulos %}
+		<div class="col-md-3 col-md-push-1 well">
+		        <img style="height:80px;" src='{{MEDIA_URL}}{{articulo.imagen}}' alt="" class="img-rounded center-block img-responsive"/>
+		    
+		    <div class="caption">
+		        <h4 style="text-align:center;">{{articulo.nombre}}</h4>
+		        <p>
+		            <a href="/articulos/detalleArticulo/{{articulo.id}}" class="btn btn-primary center-block" role="button" onmouseout="this.innerHTML='{{articulo.precio}}'" € onmouseover="this.innerHTML='Ver'">{{articulo.precio}} €</a> 
+
+		            {% if user.is_superuser %}
+		                <a href='/articulos/editarArticulo/{{articulo.id}}'><p style="text-align:center;">Editar</p></a>
+		            {% endif %}
+		        </p>
+		    </div>
+		</div> 
+		{% endfor %}   
+	</div>
+</div>
 {% endblock %}

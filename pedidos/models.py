@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
 class Pedido(models.Model):
 	usuario = models.ForeignKey(User, related_name = 'Ped_User')
-	#fecha = models.DateField(auto_now_add = True)
 	total = models.DecimalField(default=0, max_digits=6, decimal_places=2)
 	ESTADO_PEDIDO = (
 			('PA','Pagado'),
@@ -29,11 +28,6 @@ class DetallePedido(models.Model):
 class Factura(models.Model):
 	pedido = models.ForeignKey(Pedido, related_name = 'Fac_Ped')
 	fecha = models.DateField(auto_now_add = True)
-
-	# def Pagado(request, pedido):
-	# 	p = Pedido.objects.get(pk=pedido)
-	# 	p.estado = 'PA'
-	# 	p.save()
 
 	def __unicode__(self):	
 		return unicode(self.id)

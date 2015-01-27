@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+{% block focoNavLeft %}
+<li><a href="/">Inicio</a></li>
+{% if user.is_superuser %}
+    <li><a href="/usuarios/listaUsuarios/">Usuarios</a></li>
+{% endif %}
+<li><a href="/articulos/listaArticulos/">Articulo</a></li>
+<li><a href="/articulos/listaCategorias/">Categorias</a></li>
+<li><a href="/articulos/listaFabricantes/">Fabricantes</a></li>
+<li><a href="#">Ofertas</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+    <h2>Detalles de Factura:</h2>
+        
+    {% if factura %}
+        <ul>
+            <li>Numero de factura: {{factura.id}}</li>
+            <li>Fecha de compra: {{factura.fecha}}</li>
+            <li>Nombre: {{usuario.first_name}} {{usuario.last_name}}</li>
+            <li>Correo electronico: {{usuario.email}}</li>
+            <li>Telefono: {{usuario.phone}}</li>
+            <li>DNI: {{usuario.dni}}</li>
+            <li>Direccion Postal: {{usuario.address}}</li>
+        </ul>
+        <br>
+        <div class="container">  
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Artículo</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                {% for detallePedido in detallePedidos %}
+                <tbody>
+                    <tr>
+                        <td>{{detallePedido.articulo}}</td>
+                        <td>{{detallePedido.cantidad}}</td>
+                        <td>{{detallePedido.articulo.precio}}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>       
+        <br>
+        <h2>Total: {{pedido.total}}
+    {% else %}
+        <p>No existe ninguna factura</p>
+    {% endif %}
+</div>
+{% endblock %}
